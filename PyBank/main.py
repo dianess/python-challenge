@@ -7,42 +7,9 @@ bank_data_csv = os.path.join("/Users/dianeshomefolder/Documents/Code/UA Bootcamp
 with open(bank_data_csv, newline="") as file_object:
     bank_budget_data = csv.reader(file_object, delimiter = ',')
 
-    # Read the header row first
+    # Read the header row first to determine file columns
     bank_budget_header = next(bank_budget_data)
-    # print(f"Bank Budget Header: {bank_budget_header}") - used to check code
-
-    # Read through each "Date" and "Profit/Loss" row after the header
-    prev_profitloss = 0
-    sum_profit_loss = 0
-    num_months = []
-    profitloss_change = []
-    for date, profitloss in bank_budget_data:
-        sum_profit_loss += int(profitloss) # add each new "Profit/Loss" to the one before
-        num_months.append(date)  # use this to count the total number of months with len function in print statement
-        change = int(profitloss) - int(prev_profitloss)
-        profitloss_change.append(change)
-        prev_profitloss = profitloss # put new profitloss into previous for the next iteration
-        print(str(date), int(profitloss), change)
-        
-
-#Print data to terminal
-print("Financial Analysis")
-print("-------------------------------")
-print("Total Months: ", len(num_months))
-print("Total: $" + str(sum_profit_loss))
-#print("Average Change: $", str(su)))
-print("Greatest Increase in Profits: ", str(date), max(profitloss_change))
-print("Greatest Decrease in Profits: ", str(date), min(profitloss_change))
-
-bank_data_csv = os.path.join("/Users/dianeshomefolder/Documents/Code/UA Bootcamp Homework/03-Python/Instructions/PyBank/Resources/budget_data.csv")
-
-# Open and read csv
-with open(bank_data_csv, newline="") as file_object:
-    bank_budget_data = csv.reader(file_object, delimiter = ',')
-
-    # Read the header row first
-    bank_budget_header = next(bank_budget_data)
-    # print(f"Bank Budget Header: {bank_budget_header}") - used to check code
+    # print(f"Bank Budget Header: {bank_budget_header}") - use to determine column titles
 
     # Read through each "Date" and "Profit/Loss" row after the header
     prev_profitloss = 0
@@ -59,13 +26,13 @@ with open(bank_data_csv, newline="") as file_object:
         #print(str(date), int(profitloss), change)
     total_months = len(dates)
     max_increase = max(profitloss_change) # used below for boolean
-    min_increase = min(profitloss_change)
+    min_increase = min(profitloss_change) # used below for boolean
 
-    #Delete the first row because changes subtracted off the first row
+    #Delete the first row because "changes" subtracted off the first row
     del dates[0] 
     del profitloss_change[0]
 
-    #New list store change data
+    #New list stores change data
     new_bank_data = zip(dates, profitloss_change)
     sum_profitloss_change = 0
 
@@ -81,26 +48,26 @@ with open(bank_data_csv, newline="") as file_object:
         if plchange == min_increase:
             min = [date, plchange]
     max_date = str(max[0])
-    max_change = int(max[1])
+    max_change = int(max[1]) # This is equal to max_increase above, but naming it from it's new list used to find corresponding month
     min_date = str(min[0])
-    min_change = int(min[1])
+    min_change = int(min[1]) # This is equal to min_increase above, but naming it from it's new list used to find corresponding month
    
 
 #Print data to terminal
 print("Financial Analysis")
 print("-------------------------------")
 print("Total Months: ", total_months)
-print("Total: $", str(sum_profit_loss))
-print("Average Change: $", "{:.2f}".format(average_profitloss))
-print("Greatest Increase in Profits: ", max_date, "($", max_change,")")
-print("Greatest Decrease in Profits: ", min_date, "($", min_change,")")
+print("Total: $" + str(sum_profit_loss))
+print("Average Change: $" + "{:.2f}".format(average_profitloss))
+print("Greatest Increase in Profits: ", max_date, "($" + str(max_change) +")")
+print("Greatest Decrease in Profits: ", min_date, "($" + str(min_change) +")")
 
 #Print data to file
-with open('output.txt', 'w') as file:
+with open('PyBank_output.txt', 'w') as file:
     print("Financial Analysis", file=file)
     print("-------------------------------", file=file)
     print("Total Months: ", total_months, file=file)
-    print("Total: $", str(sum_profit_loss), file=file)
-    print("Average Change: $", "{:.2f}".format(average_profitloss), file=file)
-    print("Greatest Increase in Profits: ", max_date, "($", max_change, ")", file=file)
-    print("Greatest Decrease in Profits: ", min_date, "($", min_change, ")", file=file)
+    print("Total: $" + str(sum_profit_loss), file=file)
+    print("Average Change: $" + "{:.2f}".format(average_profitloss), file=file)
+    print("Greatest Increase in Profits: ", max_date, "($" + str(max_change) + ")", file=file)
+    print("Greatest Decrease in Profits: ", min_date, "($" + str(min_change) + ")", file=file)
