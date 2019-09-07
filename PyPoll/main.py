@@ -13,7 +13,6 @@ with open(poll_data_csv, newline="") as file_object:
 
     # Read through each "Voter ID", "County" and "Candidate" row after the header
     id_s = []
-    #first_candidate = 'Khan'
     Khan_vote_count = 0
     Correy_vote_count = 0
     Li_vote_count = 0
@@ -40,20 +39,39 @@ with open(poll_data_csv, newline="") as file_object:
     percent_Li = Li_vote_count/total_votes*100
     percent_O_Tooley = O_Tooley_vote_count/total_votes*100
 
-    #Testing code
+    #Determine the winner
     if Khan_vote_count > Correy_vote_count and Khan_vote_count > Li_vote_count and Khan_vote_count > O_Tooley_vote_count:
         winner = 'Khan'
     elif Correy_vote_count > Khan_vote_count and Correy_vote_count > Li_vote_count and Correy_vote_count > O_Tooley_vote_count:
         winner = 'Correy'
-    print(winner)
-
+    elif Li_vote_count > Khan_vote_count and Li_vote_count > Correy_vote_count and Li_vote_count > O_Tooley_vote_count:
+        winner = 'Li'
+    else:
+        winner = "O'Tooley"
 
 #Print data to terminal
 print("Election Results")
 print("-------------------------------")
 print("Total Votes: ", total_votes)
 print("-------------------------------")
-print("Khan: ", "{:.3f}".format(percent_Khan),"% (", Khan_vote_count, ")")
-print("Correy: ", "{:.3f}".format(percent_Correy),"% (", Correy_vote_count, ")")
-print("Li: ", "{:.3f}".format(percent_Li),"% (", Li_vote_count, ")")
-print("O'Tooley: ", "{:.3f}".format(percent_O_Tooley),"% (", O_Tooley_vote_count, ")")
+print("Khan: ", "{:.3f}".format(percent_Khan) +"% (" + str(Khan_vote_count) + ")")
+print("Correy: ", "{:.3f}".format(percent_Correy) +"% (" + str(Correy_vote_count) + ")")
+print("Li: ", "{:.3f}".format(percent_Li) +"% (" + str(Li_vote_count) + ")")
+print("O'Tooley: ", "{:.3f}".format(percent_O_Tooley) +"% (" + str(O_Tooley_vote_count) + ")")
+print("-------------------------------")
+print("Winner: ", winner)
+print("-------------------------------")
+
+#Print data to file
+with open('PyPoll_output.txt', 'w') as file:
+    print("Election Results", file=file)
+    print("-------------------------------", file=file)
+    print("Total Votes: ", total_votes, file=file)
+    print("-------------------------------", file=file)
+    print("Khan: ", "{:.3f}".format(percent_Khan) +"% (" + str(Khan_vote_count) + ")", file=file)
+    print("Correy: ", "{:.3f}".format(percent_Correy) +"% (" + str(Correy_vote_count) + ")", file=file)
+    print("Li: ", "{:.3f}".format(percent_Li) +"% (" + str(Li_vote_count) + ")", file=file)
+    print("O'Tooley: ", "{:.3f}".format(percent_O_Tooley) +"% (" + str(O_Tooley_vote_count) + ")", file=file)
+    print("-------------------------------", file=file)
+    print("Winner: ", winner, file=file)
+    print("-------------------------------", file=file)   
