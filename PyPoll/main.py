@@ -7,17 +7,18 @@ poll_data_csv = os.path.join("/Users/dianeshomefolder/Documents/Code/UA Bootcamp
 with open(poll_data_csv, newline="") as file_object:
     poll_voting_data = csv.reader(file_object, delimiter = ',')
 
-    # Read the header row first
+    # Read the header row first and move past it
     poll_voting_header = next(poll_voting_data)
-    # print(f"Poll Voting Header: {poll_voting_header}") #- used to check code
+    # print(f"Poll Voting Header: {poll_voting_header}") #- to check columns in database
 
     # Read through each "Voter ID", "County" and "Candidate" row after the header
-    id_s = []
+    id_s = [] # list for adding up the total number of voters
     Khan_vote_count = 0
     Correy_vote_count = 0
     Li_vote_count = 0
     O_Tooley_vote_count = 0
 
+    # Use "for" loop to add up the votes for each candidate
     for voter_id, county, candidate in poll_voting_data:
         id_s.append(voter_id)  # use this to count the total number of votes (1 per voter id)
 
@@ -33,6 +34,7 @@ with open(poll_data_csv, newline="") as file_object:
         if candidate == "O'Tooley":
             O_Tooley_vote_count += 1
         
+    # Find total votes and percentage of votes that each candidate earned
     total_votes = len(id_s)
     percent_Khan = Khan_vote_count/total_votes*100
     percent_Correy = Correy_vote_count/total_votes*100
