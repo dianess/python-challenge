@@ -1,7 +1,21 @@
 import os
 import csv
+import pandas as pd
 
 poll_data_csv = os.path.join("/Users/dianeshomefolder/Documents/Code/UA Bootcamp Homework/03-Python/Instructions/PyPoll/Resources/election_data.csv")
+
+# Open and read csv for use with pandas to determine number and names of unique candidates
+poll_data = pd.read_csv(poll_data_csv) 
+poll_data["Candidate"].unique()
+
+'''
+These 2 print lines were used to determine the number and names of candidates who were competing in the election.
+print(poll_data["Candidate"].unique())
+print(len(poll_data["Candidate"].unique()))
+Those 2 lines printed:
+['Khan' 'Correy' 'Li' "O'Tooley"]
+4
+'''
 
 # Open and read csv
 with open(poll_data_csv, newline="") as file_object:
@@ -9,10 +23,18 @@ with open(poll_data_csv, newline="") as file_object:
 
     # Read the header row first and move past it
     poll_voting_header = next(poll_voting_data)
-    # print(f"Poll Voting Header: {poll_voting_header}") #- to check columns in database
+
+    '''
+    The following print line was used to confirm column names in the database:
+    print(f"Poll Voting Header: {poll_voting_header}") 
+    It printed:
+    Poll Voting Header: ['Voter ID', 'County', 'Candidate']
+    '''
 
     # Read through each "Voter ID", "County" and "Candidate" row after the header
     id_s = [] # list for adding up the total number of voters
+    
+    # set each candidate's vote count to zero before beginning for loop below
     Khan_vote_count = 0
     Correy_vote_count = 0
     Li_vote_count = 0
@@ -20,7 +42,7 @@ with open(poll_data_csv, newline="") as file_object:
 
     # Use "for" loop to add up the votes for each candidate
     for voter_id, county, candidate in poll_voting_data:
-        id_s.append(voter_id)  # use this to count the total number of votes (1 per voter id)
+        id_s.append(voter_id)  # use this to count the total number of votes (1 per voter id), appended to list created above
 
         if candidate == 'Khan':
             Khan_vote_count += 1
