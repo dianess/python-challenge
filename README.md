@@ -1,3 +1,4 @@
+python-challange
 
 * In the PyBank challenge, I created a Python script for analyzing the financial records of my company. My financial data is drawn from a csv file (budget_data.csv). The dataset is composed of two columns: `Date` and `Profit/Losses`. I calculated the total number of months included in the dataset, the net total amount of profit/loss over the entire period (in this case: profit). I also calculated the average of the monthly changes, and found the month with the greatest increase in profits as well as the month with the greatest decrease in profits. The results print to the terminal and to an output file.
 
