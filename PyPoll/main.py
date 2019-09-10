@@ -1,4 +1,4 @@
-# PyPoll main.py calculates the votes and percentage of vote for 4 different candidates and shows the winner.
+# PyPoll main.py calculates the votes and percentage of votes for 4 different candidates and shows the winner.
 
 import os
 import csv
